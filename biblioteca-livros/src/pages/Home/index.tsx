@@ -10,6 +10,9 @@ import { useDebounce } from '../../hooks/useDebounce'
 import { toastError, toastSuccess } from '../../utils/toast'
 import './styles.css'
 import { useFavoritos } from '../../hooks/useFavoritos'
+import BuscaOpenLibrary from '../../components/BuscaOpenLibrary'
+import type { LivroSugestao } from '../../services/openLibrary'
+import type { LivroFormData } from '../../schemas/livro'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,6 +22,8 @@ export default function Home() {
   const queryClient = useQueryClient()
   const [somenteFavoritos, setSomenteFavoritos] = useState(false)
   const { isFavorito } = useFavoritos()
+  const [preenchimento, setPreenchimento] = useState<Partial<LivroFormData> | undefined>()
+  const [formKey, setFormKey] = useState(0)
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['livros'],
@@ -49,6 +54,22 @@ export default function Home() {
     return combinaBusca && combinaGenero && combinaFavorito
   })
 
+  function abrirModal() {
+    setPreenchimento(undefined)
+    setFormKey((k) => k + 1)
+    setIsModalOpen(true)
+  }
+
+  function handleSelecionar(sugestao: LivroSugestao) {
+    setPreenchimento({
+      titulo: sugestao.titulo,
+      autor: sugestao.autor,
+      ano: sugestao.ano,
+      imagem: sugestao.imagem,
+    })
+    setFormKey((k) => k + 1)
+  }
+
   function renderLista() {
     if (isLoading) {
       return <p>Carregando livros...</p>
@@ -75,7 +96,7 @@ export default function Home() {
     <Container>
       <div className="home-topo">
         <h2>Acervo</h2>
-        <button className="btn-primario" onClick={() => setIsModalOpen(true)}>
+        <button className="btn-primario" onClick={abrirModal}>
           + Novo livro
         </button>
       </div>
@@ -95,7 +116,7 @@ export default function Home() {
             </option>
           ))}
         </select>
-                <label className="home-favoritos-check">
+        <label className="home-favoritos-check">
           <input
             type="checkbox"
             checked={somenteFavoritos}
@@ -108,8 +129,11 @@ export default function Home() {
       {renderLista()}
 
       <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+        <BuscaOpenLibrary onSelecionar={handleSelecionar} />
         <LivroForm
+          key={formKey}
           textoBotao="Cadastrar livro"
+          defaultValues={preenchimento}
           isPending={createMutation.isPending}
           onCancel={() => setIsModalOpen(false)}
           onSubmit={(formData) => createMutation.mutate(formData)}
