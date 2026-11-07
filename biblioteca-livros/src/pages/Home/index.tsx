@@ -9,6 +9,7 @@ import { GENEROS } from '../../schemas/livro'
 import { useDebounce } from '../../hooks/useDebounce'
 import { toastError, toastSuccess } from '../../utils/toast'
 import './styles.css'
+import { useFavoritos } from '../../hooks/useFavoritos'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -16,6 +17,8 @@ export default function Home() {
   const [genero, setGenero] = useState('')
   const buscaDebounced = useDebounce(busca)
   const queryClient = useQueryClient()
+  const [somenteFavoritos, setSomenteFavoritos] = useState(false)
+  const { isFavorito } = useFavoritos()
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['livros'],
@@ -37,12 +40,13 @@ export default function Home() {
 
   const livrosFiltrados = (data ?? []).filter((livro) => {
     const termo = buscaDebounced.toLowerCase().trim()
+    const combinaFavorito = !somenteFavoritos || isFavorito(livro.id)
     const combinaBusca =
       !termo ||
       livro.titulo.toLowerCase().includes(termo) ||
       livro.autor.toLowerCase().includes(termo)
     const combinaGenero = !genero || livro.genero === genero
-    return combinaBusca && combinaGenero
+    return combinaBusca && combinaGenero && combinaFavorito
   })
 
   function renderLista() {
@@ -91,6 +95,14 @@ export default function Home() {
             </option>
           ))}
         </select>
+                <label className="home-favoritos-check">
+          <input
+            type="checkbox"
+            checked={somenteFavoritos}
+            onChange={(e) => setSomenteFavoritos(e.target.checked)}
+          />
+          Só favoritos
+        </label>
       </div>
 
       {renderLista()}

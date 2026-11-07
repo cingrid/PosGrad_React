@@ -40,3 +40,15 @@
   flex: 1;
   min-width: 220px;
 }
+
+.home-favoritos-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.home-favoritos-check input {
+  height: auto;
+  width: auto;
+}

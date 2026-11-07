@@ -8,12 +8,14 @@ import LivroForm from '../../components/LivroForm'
 import { deleteLivro, getLivro, updateLivro } from '../../services/livros'
 import { toastError, toastSuccess } from '../../utils/toast'
 import './styles.css'
+import { useFavoritos } from '../../hooks/useFavoritos'
 
 export default function Detalhes() {
   const params = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const id = String(params.id)
+  const { removerFavorito } = useFavoritos()
 
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
@@ -33,8 +35,7 @@ export default function Detalhes() {
       setIsEditOpen(false)
       queryClient.invalidateQueries({ queryKey: ['livro', id] })
       queryClient.invalidateQueries({ queryKey: ['livros'] })
-    },
-    onError: () => {
+    }, onError: () => {
       toastError('Erro ao atualizar o livro')
     },
   })
@@ -42,12 +43,12 @@ export default function Detalhes() {
   const deleteMutation = useMutation({
     mutationFn: () => deleteLivro(id),
     onSuccess: () => {
+      removerFavorito(Number(id))
       toastSuccess('Livro excluído com sucesso')
       setIsDeleteOpen(false)
       navigate('/home', { replace: true })
       queryClient.invalidateQueries({ queryKey: ['livros'] })
-    },
-    onError: () => {
+    }, onError: () => {
       toastError('Erro ao excluir o livro')
     },
   })
@@ -86,13 +87,13 @@ export default function Detalhes() {
   // Dados do livro sem o id, para preencher o formulário de edição
   const valoresIniciais = data
     ? {
-        titulo: data.titulo,
-        autor: data.autor,
-        genero: data.genero,
-        ano: data.ano,
-        imagem: data.imagem,
-        sinopse: data.sinopse,
-      }
+      titulo: data.titulo,
+      autor: data.autor,
+      genero: data.genero,
+      ano: data.ano,
+      imagem: data.imagem,
+      sinopse: data.sinopse,
+    }
     : undefined
 
   return (
