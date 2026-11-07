@@ -20,7 +20,8 @@ export default function Detalhes() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['livro', id],
-    queryFn: () => getLivro(id),
+    //queryFn: () => getLivro(id),
+    queryFn: ({ signal }) => getLivro(id, signal),
     retry: false,
   })
 

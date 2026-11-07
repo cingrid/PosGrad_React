@@ -18,3 +18,25 @@
   align-items: center;
   margin-bottom: 24px;
 }
+
+.home-filtros {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.home-filtros input,
+.home-filtros select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+.home-filtros input {
+  flex: 1;
+  min-width: 220px;
+}

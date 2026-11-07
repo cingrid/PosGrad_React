@@ -1,13 +1,23 @@
 import { api } from './api'
 import type { Livro } from '../Types'
 
-export async function getLivros(): Promise<Livro[]> {
+/*export async function getLivros(): Promise<Livro[]> {
   const response = await api.get<Livro[]>('/livros')
   return response.data
 }
 
 export async function getLivro(id: string): Promise<Livro> {
   const response = await api.get<Livro>(`/livros/${id}`)
+  return response.data
+}*/
+
+export async function getLivros(signal?: AbortSignal): Promise<Livro[]> {
+  const response = await api.get<Livro[]>('/livros', { signal })
+  return response.data
+}
+
+export async function getLivro(id: string, signal?: AbortSignal): Promise<Livro> {
+  const response = await api.get<Livro>(`/livros/${id}`, { signal })
   return response.data
 }
 
