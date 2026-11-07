@@ -1,0 +1,39 @@
+{
+  "name": "biblioteca-livros",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "api": "node api/server.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^7.0.3",
+    "@tanstack/react-query": "^5.107.1",
+    "axios": "^1.21.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hook-form": "^7.91.0",
+    "react-icons": "^5.7.0",
+    "react-modal": "^3.16.3",
+    "react-router": "^8.5.1",
+    "react-toastify": "^11.2.0",
+    "yup": "^1.7.1",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/react-modal": "^3.16.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.90.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.6"
+  }
+}

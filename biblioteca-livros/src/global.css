@@ -1,0 +1,28 @@
+:root {
+  --cor-primaria: #3b5bdb;
+  --cor-primaria-escura: #2f4ac0;
+  --cor-fundo: #f4f6fb;
+  --cor-texto: #1f2430;
+  --cor-borda: #d9dde8;
+  --cor-erro: #d64545;
+  --cor-sucesso: #2f9e5b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}

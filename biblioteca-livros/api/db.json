@@ -1,0 +1,40 @@
+{
+  "livros": [
+    {
+      "id": 1,
+      "titulo": "Dom Casmurro",
+      "autor": "Machado de Assis",
+      "genero": "Romance",
+      "ano": 1899,
+      "imagem": "https://picsum.photos/seed/livro1/300/400",
+      "sinopse": "Bentinho narra a própria vida e a dúvida sobre a fidelidade de Capitu."
+    },
+    {
+      "id": 2,
+      "titulo": "A Hora da Estrela",
+      "autor": "Clarice Lispector",
+      "genero": "Romance",
+      "ano": 1977,
+      "imagem": "https://picsum.photos/seed/livro2/300/400",
+      "sinopse": "A história de Macabéa, uma jovem nordestina vivendo no Rio de Janeiro."
+    },
+    {
+      "id": 3,
+      "titulo": "Grande Sertão: Veredas",
+      "autor": "João Guimarães Rosa",
+      "genero": "Romance",
+      "ano": 1956,
+      "imagem": "https://picsum.photos/seed/livro3/300/400",
+      "sinopse": "Riobaldo conta suas memórias de jagunço pelo sertão de Minas Gerais."
+    },
+    {
+      "id": 4,
+      "titulo": "Memórias Póstumas de Brás Cubas",
+      "autor": "Machado de Assis",
+      "genero": "Romance",
+      "ano": 1881,
+      "imagem": "https://picsum.photos/seed/livro4/300/400",
+      "sinopse": "Um defunto autor narra sua vida com ironia e humor."
+    }
+  ]
+}
