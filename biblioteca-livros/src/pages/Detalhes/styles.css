@@ -1,0 +1,46 @@
+.detalhes-voltar {
+  background: transparent;
+  border: none;
+  color: var(--cor-primaria);
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.detalhes-card {
+  background-color: #fff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.detalhes-card img {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.detalhes-info {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detalhes-autor {
+  font-weight: 500;
+}
+
+.detalhes-meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.detalhes-erro {
+  color: var(--cor-erro);
+}
