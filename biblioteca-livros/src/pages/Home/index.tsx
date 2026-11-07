@@ -1,14 +1,33 @@
-import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Container from '../../templates/Container'
 import LivroCard from '../../components/LivroCard'
-import { getLivros } from '../../services/livros'
+import Modal from '../../components/Modal'
+import LivroForm from '../../components/LivroForm'
+import { createLivro, getLivros } from '../../services/livros'
+import { toastError, toastSuccess } from '../../utils/toast'
 import './styles.css'
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const queryClient = useQueryClient()
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['livros'],
     queryFn: getLivros,
     retry: false,
+  })
+
+  const createMutation = useMutation({
+    mutationFn: createLivro,
+    onSuccess: () => {
+      toastSuccess('Livro cadastrado com sucesso')
+      setIsModalOpen(false)
+      queryClient.invalidateQueries({ queryKey: ['livros'] })
+    },
+    onError: () => {
+      toastError('Erro ao cadastrar o livro')
+    },
   })
 
   function renderLista() {
@@ -32,8 +51,23 @@ export default function Home() {
 
   return (
     <Container>
-      <h2 className="home-titulo">Acervo</h2>
+      <div className="home-topo">
+        <h2>Acervo</h2>
+        <button className="btn-primario" onClick={() => setIsModalOpen(true)}>
+          + Novo livro
+        </button>
+      </div>
+
       {renderLista()}
+
+      <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+        <LivroForm
+          textoBotao="Cadastrar livro"
+          isPending={createMutation.isPending}
+          onCancel={() => setIsModalOpen(false)}
+          onSubmit={(formData) => createMutation.mutate(formData)}
+        />
+      </Modal>
     </Container>
   )
 }

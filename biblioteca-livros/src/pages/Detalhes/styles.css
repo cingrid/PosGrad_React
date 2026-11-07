@@ -44,3 +44,32 @@
 .detalhes-erro {
   color: var(--cor-erro);
 }
+.detalhes-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.detalhes-acoes button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detalhes-confirmar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detalhes-confirmar p {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.detalhes-confirmar-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}

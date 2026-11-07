@@ -35,6 +35,15 @@
       "ano": 1881,
       "imagem": "https://picsum.photos/seed/livro4/300/400",
       "sinopse": "Um defunto autor narra sua vida com ironia e humor."
+    },
+    {
+      "id": 5,
+      "titulo": "Teste Criaçao - Teste Editar",
+      "autor": "Autor Teste",
+      "genero": "Conto",
+      "ano": 2010,
+      "imagem": "https://picsum.photos/seed/novo/300/400",
+      "sinopse": "Testando a publicaçao de um livro na biblioteca da vila! =D\n-\nTestando mudanças no card do livro"
     }
   ]
 }
